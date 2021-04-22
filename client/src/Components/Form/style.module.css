@@ -1,0 +1,11 @@
+.input input {
+  padding-left: 40px;
+}
+.input::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f02c";
+  position: relative;
+  left: 80px;
+  bottom: -6px;
+}
