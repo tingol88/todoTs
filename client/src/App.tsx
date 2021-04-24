@@ -9,7 +9,18 @@ import { Todoitem } from './types';
 
 function App() {
   // в дженереке прописываем type или допустим массив типов
-  const [list, setList] = useState<Todoitem[]>([]);// useState должен принимать массив объектов
+  const [list, setList] = useState<Todoitem[]>([{
+    id: '123455',
+    title: 'deal',
+    isDone: false,
+    createdAt: new Date(),
+  }, {
+
+    id: '12345675',
+    title: 'real deal',
+    isDone: false,
+    createdAt: new Date(),
+  } ]);// useState должен принимать массив объектов
   const [activeItem, setActiveItem] = useState<Todoitem | null>(null); // useState может быть или объектом с полями из type TodoItem
 
   // когда отправляем форму 
@@ -20,6 +31,9 @@ const onSubmit = (value: string) => {
     createdAt: new Date(),
     isDone: false,
   },...list])
+}
+const onClickDelete = (id: string|undefined):void =>{
+  setList(pre => pre.filter((el)=>el.id !== id))
 }
 
   // const onSubmit = (value: string) => {
@@ -44,7 +58,7 @@ const onSubmit = (value: string) => {
     <div className="App">
       {/* <Form initialValue={activeItem?.title} onSubmit={onSubmit} /> */}
       <Form onSubmit={onSubmit} />
-      <List data={list} />
+      <List data={list} onClickDelete={onClickDelete} />
     </div>
   );
 }
