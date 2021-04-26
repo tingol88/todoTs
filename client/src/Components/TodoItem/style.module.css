@@ -1,0 +1,6 @@
+.done{
+  background-color:grey;
+  color: gainsboro;
+  text-decoration:line-through ;
+  font-style: italic;
+}
