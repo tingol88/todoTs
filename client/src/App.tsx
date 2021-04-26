@@ -5,7 +5,7 @@ import "./App.css";
 import Form from "./Components/Form/Form";
 import List from "./Components/List/List";
 
-function App() {
+const App: React.FC = () => {
   const [input, setInput] = useState("");
   const [list, setList] = useState([]);
   const handlerInput: (event: any) => void = (event: any) => {
@@ -24,6 +24,6 @@ function App() {
       <List />
     </div>
   );
-}
+};
 
 export default App;
