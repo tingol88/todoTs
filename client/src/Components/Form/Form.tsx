@@ -1,13 +1,15 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent, VFC } from 'react'
 
+import { Todoitem } from '../../types';
 import styles from "./style.module.css";
 
 type FormProps = {
   initialValue?: string;
   onSubmit?: (value: string) => void;
+  activeItem: Todoitem|null;
 }
 
-const Form: VFC<FormProps> = ({ initialValue = '', onSubmit }) => {
+const Form: VFC<FormProps> = ({ initialValue = '', onSubmit, activeItem}) => {
   const [value, setValue] = useState<string>(initialValue);
 
   const handleSubmit = (e: FormEvent) => {
@@ -21,9 +23,9 @@ const Form: VFC<FormProps> = ({ initialValue = '', onSubmit }) => {
     setValue(e.target.value);
   }
 
-  // useEffect(() => {
-  //   setValue(initialValue);
-  // }, [initialValue]);
+  useEffect(() => {
+    if(activeItem?.title )setValue(activeItem.title);
+  }, [activeItem]);
 
   return (
     <form
@@ -44,7 +46,7 @@ const Form: VFC<FormProps> = ({ initialValue = '', onSubmit }) => {
         className="btn btn-primary"
       >
         {" "}
-        <i className="far fa-plus-square"></i> Add
+        <i className="far fa-plus-square"></i> {activeItem?.title? 'Edit': 'Add'}
       </button>
     </form>
   );

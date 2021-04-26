@@ -1,4 +1,4 @@
-export type Todoitem =  {
+export type Todoitem = {
   id: string;
   title: string;
   isDone: boolean;

@@ -6,16 +6,17 @@ type ListProps = {
   data: Todoitem[];
   onClickDelete:(id:string)=>void;
   onClickDone: (id:string)=> void;
+  onClickEdit: (id:string) => void;
 }
 
 // создаем component Void Functional Component и указываем у него 
-const List: VFC<ListProps> = ({ data, onClickDelete, onClickDone }) => {
+const List: VFC<ListProps> = ({ data, onClickDelete, onClickDone, onClickEdit }) => {
   return (
     <div className="">
       <h1>Todo list</h1>
       <div className="d-flex justify-content-center">
         <ul className="list-group d-flex col-11">
-          {data.map(item => (<TodoItem {...item} key={item.id} onClickDelete={onClickDelete}  onClickDone={onClickDone}/>))}
+          {data.map(item => (<TodoItem {...item} key={item.id} onClickDelete={onClickDelete}  onClickDone={onClickDone} onClickEdit={onClickEdit}/>))}
         </ul>
       </div>
     </div>
