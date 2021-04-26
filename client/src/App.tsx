@@ -18,7 +18,7 @@ function App() {
 
     id: '12345675',
     title: 'real deal',
-    isDone: false,
+    isDone: true,
     createdAt: new Date(),
   } ]);// useState должен принимать массив объектов
   const [activeItem, setActiveItem] = useState<Todoitem | null>(null); // useState может быть или объектом с полями из type TodoItem
@@ -26,14 +26,24 @@ function App() {
   // когда отправляем форму 
 const onSubmit = (value: string) => {
   setList([{
-    id: `${Math.random()}${Date.now()}`,
+    id: `${Math.floor(Math.random()*100000)}`,
     title: value,
     createdAt: new Date(),
     isDone: false,
   },...list])
 }
-const onClickDelete = (id: string|undefined):void =>{
+console.log(list);
+
+const onClickDelete = (id: string):void =>{
   setList(pre => pre.filter((el)=>el.id !== id))
+}
+const onClickDone = (id:string):void => {  
+  setList(pre => pre.map((el, i) => {
+      if (el.id === id) {
+        el.isDone = !el.isDone
+      }
+      return el
+    }))
 }
 
   // const onSubmit = (value: string) => {
@@ -58,7 +68,7 @@ const onClickDelete = (id: string|undefined):void =>{
     <div className="App">
       {/* <Form initialValue={activeItem?.title} onSubmit={onSubmit} /> */}
       <Form onSubmit={onSubmit} />
-      <List data={list} onClickDelete={onClickDelete} />
+      <List data={list} onClickDelete={onClickDelete} onClickDone={onClickDone} />
     </div>
   );
 }

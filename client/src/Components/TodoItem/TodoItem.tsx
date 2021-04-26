@@ -1,28 +1,32 @@
 import React, { VFC } from "react";
+
 import { Todoitem } from "../../types";
+import styles from "./style.module.css"
 
 // мы расширяем type - через & и в расширяемом объекте свойства могут
 // как присутствовать так и не
 type TodoItemProps = Todoitem & {
   onActivate?: () => void;
-  onDone?: () => void;
-  onClickDelete?: (id:string|undefined)=> void;
+  onClickDone?: (id:string) => void;
+  onClickDelete?: (id:string)=> void;
+
 }
 
 // прописываем тип пропсов у компонента
-const TodoItem: VFC<TodoItemProps> = ({ id, title, isDone, onClickDelete,}) => {
+const TodoItem: VFC<TodoItemProps> = ({ id, title, isDone, onClickDelete, onClickDone}) => {
 
   const handleClick = ():void => {
     onClickDelete?.(id);
   }
   return (
-    <li className="list-group-item d-flex justify-content-start align-items-center">
-      <input
+    <li className={`list-group-item d-flex justify-content-start align-items-center ${isDone? styles.done:null}`}>
+      <input onClick={()=> {
+        onClickDone?.(id)
+      }}
         className="form-check-input me-1"
         type="checkbox"
         value=""
         aria-label="..."
-        data-id={id}
         defaultChecked={isDone}
       />
       {title}
